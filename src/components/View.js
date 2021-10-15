@@ -12,7 +12,7 @@ const View = (props) => {
     const [editing, setEditing] = useState(false);
     const [editId, setEditId] = useState();
 
-    let test = [];
+    
 
     useEffect(() => {
         axiosWithAuth()
@@ -28,10 +28,22 @@ const View = (props) => {
         .then(res => {
             return setArticles(res.data)
         })
+        .catch(err => {
+            console.error(err);
+        })
     }
 
-    const handleEdit = (article) => {
-        
+    const handleEdit = (test) => {
+        console.log('here', test)
+    }
+
+    const temp = test => {
+        console.log(test)
+        axiosWithAuth()
+        .put(`/articles/${test.id}`, test)
+        .then(res => {
+           setArticles(res.data)
+        })
     }
 
     const handleEditSelect = (id)=> {
@@ -60,7 +72,7 @@ const View = (props) => {
             </ArticleContainer>
             
             {
-                editing && <EditForm editId={editId} handleEdit={() => handleEdit(editId)} handleEditCancel={handleEditCancel}/>
+                editing && <EditForm editId={editId} handleEdit={() => handleEdit(editId)} handleEditCancel={handleEditCancel} temp={temp}/>
             }
         </ContentContainer>
     </ComponentContainer>);
