@@ -40,6 +40,25 @@ const Login = (props) => {
             })
         })
     }
+
+    if (state.error) { 
+        return(
+            <ComponentContainer>
+            <h1>{state.error}</h1>
+            <ModalContainer>
+                <h1>Welcome to Blogger Pro</h1>
+                <h2>Please enter your account information.</h2>
+            </ModalContainer>
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <input name='username' type='text' placeholder='Username' id='username' onChange={handleChange}></input>
+                    <input name='password' type='password' placeholder='Password' id='password'  onChange={handleChange}></input>
+                    <button id='submit'>Login</button>
+                </form>
+            </div>
+        </ComponentContainer>
+        )
+    }
     
     return(<ComponentContainer>
         <ModalContainer>
