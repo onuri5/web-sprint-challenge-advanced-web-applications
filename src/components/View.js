@@ -14,12 +14,13 @@ const View = (props) => {
 
     
 
-    useEffect(() => {
+    useEffect(async() => {
         axiosWithAuth()
         .get('/articles')
         .then(res => {
             return setArticles(res.data)
         })
+        
     }, [])
 
     const handleDelete = (id) => {
@@ -31,10 +32,6 @@ const View = (props) => {
         .catch(err => {
             console.error(err);
         })
-    }
-
-    const handleEdit = (test) => {
-        console.log('here', test)
     }
 
     const temp = test => {
@@ -54,6 +51,8 @@ const View = (props) => {
     const handleEditCancel = ()=>{
         setEditing(false);
     }
+
+    console.log(articles)
 
     return(<ComponentContainer>
         <HeaderContainer>View Articles</HeaderContainer>
@@ -107,7 +106,7 @@ const ArticleDivider = styled.div`
 const ComponentContainer = styled.div`
     display:flex;
     width: 80%;
-    flex-direction: column;
+    flex-flow: column wrap;
     justify-content: center;
     
 `
