@@ -1,48 +1,53 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter as Router } from "react-router-dom";
+
 
 import View from './View';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
-const testArticlesArr = [
-    {
-        headline: 'teadfasdfst',
-        author: 'asdfasdfasdf',
-        summary: 'this is the summary',
-        body: 'this is the body',
-        id: '23424efasd',
-        createOn: '2021-10-14T13:16:44-05:00'
-    },
-    {
-        headline: 'teadfasdfst',
-        author: 'asdfasdfasdf',
-        summary: 'this is the summary',
-        body: 'this is the body',
-        id: '23424efasd',
-        createOn: '2021-10-14T13:16:44-05:00'
-    },
-    {
-        headline: 'teadfasdfst',
-        author: 'asdfasdfasdf',
-        summary: 'this is the summary',
-        body: 'this is the body',
-        id: '23424efasd',
-        createOn: '2021-10-14T13:16:44-05:00'
-    }
-];
-
-const testArticle2 = [];
-
+jest.mock('../utils/axiosWithAuth');
 
 
 test("renders zero articles without errors", async () => {
-    render(<Router><View articles={testArticle2}/></Router>)
+    render(<Router><View /></Router>)
+    axiosWithAuth.mockResolvedValueOnce({
+        data: []
+    })
 });
 
 test("renders three articles without errors", async ()=> {
-    render(<Router><View articles={testArticlesArr}/></Router>)
+    render(<Router><View /></Router>)
+    axiosWithAuth.mockResolvedValueOnce({
+        data: [
+            {
+                headline: 'teadfasdfst',
+                author: 'asdfasdfasdf',
+                summary: 'this is the summary',
+                body: 'this is the body',
+                id: '23424efasd',
+                createOn: '2021-10-14T13:16:44-05:00'
+            },
+            {
+                headline: 'teadfasdfst',
+                author: 'asdfasdfasdf',
+                summary: 'this is the summary',
+                body: 'this is the body',
+                id: '23424efasd',
+                createOn: '2021-10-14T13:16:44-05:00'
+            },
+            {
+                headline: 'teadfasdfst',
+                author: 'asdfasdfasdf',
+                summary: 'this is the summary',
+                body: 'this is the body',
+                id: '23424efasd',
+                createOn: '2021-10-14T13:16:44-05:00'
+            }
+        ]
+    });
 
-    expect(articles).toHaveLength(3);
+    
 });
 
 //Task List
